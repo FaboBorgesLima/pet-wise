@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: app/
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+    develop:
+      watch:
+        - action: rebuild
+          path: app
+  db:
+    build:
+      context: db/
+    env_file:
+      - .env
+    develop:
+      watch:
+        - action: rebuild
+          path: db
