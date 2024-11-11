@@ -8,7 +8,8 @@ services:
       - .env
     develop:
       watch:
-        - action: rebuild
+        - action: sync
+          target: /var/www/html
           path: app
   db:
     build:
