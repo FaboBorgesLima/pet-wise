@@ -2,4 +2,5 @@
 
 require 'vendor/autoload.php';
 
-echo "Hello";
+
+var_dump(App\MedicalHistory::byId(2));
