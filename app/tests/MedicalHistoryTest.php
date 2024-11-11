@@ -1,6 +1,6 @@
 <?php
 
-use App\MedicalHistory;
+use App\Models\MedicalHistory;
 use \PHPUnit\Framework\TestCase;
 
 final class MedicalHistoryTest extends TestCase

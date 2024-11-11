@@ -3,4 +3,10 @@
 require 'vendor/autoload.php';
 
 
-var_dump(App\MedicalHistory::byId(2));
+use App\Controllers\MedicalHistoryController;
+use App\Models\Router;
+
+
+Router::get("/", MedicalHistoryController::class, "get");
+
+Router::run();
