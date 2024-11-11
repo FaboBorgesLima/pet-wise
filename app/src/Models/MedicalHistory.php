@@ -11,10 +11,10 @@ class MedicalHistory
     public string $notes = "";
     public string $medications = "";
     public int $id = 0;
-    private \mysqli $conn;
+    private ?\mysqli $conn;
     static private string $table_name = "medical_history";
 
-    private function __construct(string $pet_name, int $appointment_date, string $notes, string $medications, int $id, \mysqli $conn)
+    private function __construct(string $pet_name, int $appointment_date, string $notes, string $medications, int $id, ?\mysqli $conn = null)
     {
         $this->pet_name = $pet_name;
         $this->appointment_date = $appointment_date;
@@ -25,7 +25,8 @@ class MedicalHistory
     }
     public function __destruct()
     {
-        $this->conn->close();
+        if ($this->conn)
+            $this->conn->close();
     }
 
     static function create(string $pet_name, string  $notes, string $medications, ?int $appointment_date = null): MedicalHistory
@@ -60,8 +61,11 @@ class MedicalHistory
     {
         $table_name = MedicalHistory::$table_name;
         $conn = Connection::get();
-        $q = $conn->query("SELECT * FROM $table_name")->fetch_all();
-        $conn->close();
+        $q = $conn->query("SELECT * FROM $table_name")->fetch_all(MYSQLI_ASSOC);
+        $q = array_map(function ($item) {
+            return new MedicalHistory($item["pet_name"], strtotime($item["appointment_date"]), $item["notes"], $item["medications"], $item["id"]);
+        }, $q);
+
         return $q;
     }
 

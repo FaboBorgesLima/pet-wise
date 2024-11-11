@@ -15,24 +15,12 @@ class Router
         Router::$routes[] = new Route($path, "POST", $cl, $cl_method);
     }
 
-    static function path(string $path, $cl, string $cl_method)
-    {
-        Router::$routes[] = new Route($path, "PATH", $cl, $cl_method);
-    }
-
-
-    static function delete(string $path, $cl, string $cl_method)
-    {
-        Router::$routes[] = new Route($path, "DELETE", $cl, $cl_method);
-    }
-
-
     static function run()
     {
-        $req = new Request(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), $_SERVER["REQUEST_METHOD"], $_POST, $_GET);
-
+        $req = new Request(parse_url("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]", PHP_URL_PATH), $_SERVER["REQUEST_METHOD"], $_POST, $_GET);
         foreach (Router::$routes as $route) {
-            if ($route->path == $req->path && $route->method == $req->method) {
+            if (($route->path == $req->path || $route->path . '/' == $req->path) && $route->method == $req->method) {
+
                 $route->run($req);
                 return;
             }
