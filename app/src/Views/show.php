@@ -15,7 +15,7 @@ class Show
         <html lang="en">
 
         <?php
-        Head::render("View");
+        Head::render($item ? $item->pet_name : "create");
         ?>
 
         <body>
@@ -27,12 +27,15 @@ class Show
                     ?>
                         <input style="display: none;" name="id" value="<?= $item->id ?>">
                     <?php endif ?>
-
-                    <input name="pet_name" value="<?= $item ? $item->pet_name : '' ?>">
-                    <textarea name="notes" placeholder="notes"><?= $item ? $item->notes : '' ?></textarea>
-                    <textarea name="medications" placeholder="medication"><?= $item ? $item->medications : '' ?></textarea>
-                    <input name="appointment_date" type="date" value="<?= $item ? date("Y-m-d", $item->appointment_date) : date("Y-m-d") ?>">
-                    <button type="submit">Send</button>
+                    <label for="petName">pet name</label>
+                    <input name="pet_name" id="petName" placeholder="pet name" value="<?= $item ? $item->pet_name : '' ?>">
+                    <label for="notes">notes</label>
+                    <textarea name="notes" id="notes" placeholder="notes"><?= $item ? $item->notes : '' ?></textarea>
+                    <label for="medications">medications</label>
+                    <textarea name="medications" id="medications" placeholder="medication"><?= $item ? $item->medications : '' ?></textarea>
+                    <label for="appointmentDate">appointment date</label>
+                    <input name="appointment_date" id="appointmentDate" type="date" value="<?= $item ? date("Y-m-d", $item->appointment_date) : date("Y-m-d") ?>">
+                    <button type="submit"><?= $item ? 'update' : 'create' ?></button>
                 </form>
                 <?php if ($item): ?>
                     <form method="post" action="/medical-history/delete">

@@ -30,8 +30,7 @@ class ShowAll
                     }
                     ?>
                 </div>
-
-                <a href="/medical-history" class="button">Add Appointment</a>
+                <a href="/medical-history" class="button">Add Medical History</a>
             </main>
 
         </body>
