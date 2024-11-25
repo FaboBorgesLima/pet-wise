@@ -1,9 +1,7 @@
-## Start
+# PetWise
 
-For stating the application in dev mode you can run
+In this application you can create a simple medical history of your pet patients, you can register their name, date of appointment, notes and medications.
 
-```shell
-docker compose up --watch
-```
+Most of this project was to explore pure PHP and MVC, so there isn't a lot going on the frontend.
 
-Enjoy it !
+If you want to learn more about this project you can check at [the docs](/docs/)
