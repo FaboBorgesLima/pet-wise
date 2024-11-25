@@ -17,7 +17,7 @@ class ShowAll
         <html lang="en">
 
         <?php
-        Head::render("View");
+        Head::render("Dashboard");
         ?>
 
         <body>

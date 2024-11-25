@@ -1,0 +1,19 @@
+.logo {
+    height: 10rem;
+}
+.flex {
+    display: flex;
+}
+.flex-row {
+    flex-direction: row;
+}
+.items-center {
+    align-items: center;
+}
+.main-title {
+    margin: 0;
+    font-size: 5rem;
+}
+.gap-1 {
+    gap: 1rem;
+}

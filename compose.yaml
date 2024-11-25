@@ -8,9 +8,23 @@ services:
       - .env
     develop:
       watch:
+        - action: rebuild
+          path: app/Dockerfile
+        - action: rebuild
+          path: app/composer.json
+        - action: sync+restart
+          path: app/apache2.conf
+          target: /etc/apache2/
         - action: sync
-          target: /var/www/html
-          path: app
+          path: app/index.php
+          target: /var/www/html/index.php
+        - action: sync
+          path: app/public
+          target: /var/www/html/index.php
+        - action: rebuild
+          path: app/src
+        - action: rebuild
+          path: app/tests
   db:
     build:
       context: db/
