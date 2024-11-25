@@ -15,7 +15,13 @@ For getting intellisense on vscode (you can ignore this step if you dont need in
 composer install
 ```
 
-After installing you can start developing running this command on /:
+You need to have a .env file so compose run flawless, you can copy .env.example to .env in /:
+
+```shell
+cp .env.example .env
+```
+
+You can start developing running this command on /:
 
 ```shell
 docker compose up --watch
