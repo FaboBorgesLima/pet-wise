@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Models;
+use App\Connection\Db;
 
-use App\Connection;
 
 class MedicalHistory
 {
@@ -11,8 +11,8 @@ class MedicalHistory
     public string $notes = "";
     public string $medications = "";
     public int $id = 0;
-    private ?\mysqli $conn;
-    static private string $table_name = "medical_history";
+    public ?\mysqli $conn;
+    public static string $table_name = "medical_history";
 
     private function __construct(string $pet_name, int $appointment_date, string $notes, string $medications, int $id, ?\mysqli $conn = null)
     {
@@ -23,15 +23,16 @@ class MedicalHistory
         $this->id = $id;
         $this->conn = $conn;
     }
+
     public function __destruct()
     {
         if ($this->conn)
             $this->conn->close();
     }
 
-    static function create(string $pet_name, string  $notes, string $medications, ?int $appointment_date = null): MedicalHistory
+    public static function create(string $pet_name, string $notes, string $medications, ?int $appointment_date = null): MedicalHistory
     {
-        $conn = Connection::get();
+        $conn = Db::get();
 
         $table_name = MedicalHistory::$table_name;
         $stmt = $conn->prepare("INSERT INTO {$table_name}(pet_name,appointment_date,notes,medications) VALUES (?,?,?,?)");
@@ -43,24 +44,24 @@ class MedicalHistory
         return new MedicalHistory($pet_name, $appointment_date, $notes, $medications, $stmt->insert_id, $conn);
     }
 
-    function save(): void
+    public function save(): void
     {
         $table_name = MedicalHistory::$table_name;
         $stmt = $this->conn->prepare("UPDATE {$table_name} SET pet_name=?,appointment_date=?,notes=?,medications=? WHERE id = ?");
         $stmt->execute([$this->pet_name, date('Y-m-d H:i:s', $this->appointment_date), $this->notes, $this->medications, $this->id]);
     }
 
-    function delete(): void
+    public function delete(): void
     {
         $table_name = MedicalHistory::$table_name;
         $stmt = $this->conn->prepare("DELETE FROM {$table_name} WHERE id = ?");
         $stmt->execute([$this->id]);
     }
 
-    static function all(): array
+    public static function all(): array
     {
         $table_name = MedicalHistory::$table_name;
-        $conn = Connection::get();
+        $conn = Db::get();
         $q = $conn->query("SELECT * FROM $table_name")->fetch_all(MYSQLI_ASSOC);
         $q = array_map(function ($item) {
             return new MedicalHistory($item["pet_name"], strtotime($item["appointment_date"]), $item["notes"], $item["medications"], $item["id"]);
@@ -69,10 +70,10 @@ class MedicalHistory
         return $q;
     }
 
-    static function byId(int $id): ?MedicalHistory
+    public static function byId(int $id): ?MedicalHistory
     {
         $table_name = MedicalHistory::$table_name;
-        $conn = Connection::get();
+        $conn = Db::get();
         $stmt = $conn->prepare("SELECT * FROM $table_name WHERE id = ?");
         $q = $stmt->execute([$id]);
 

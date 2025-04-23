@@ -1,11 +1,12 @@
 <?php
 
+namespace Tests;
 use App\Models\MedicalHistory;
 use \PHPUnit\Framework\TestCase;
 
 final class MedicalHistoryTest extends TestCase
 {
-    public function testCanCRUD(): void
+    public function test_can_crud(): void
     {
         //create
         $medical = MedicalHistory::create("aa", "aaa", "aaaa");

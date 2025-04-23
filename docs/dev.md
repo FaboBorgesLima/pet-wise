@@ -5,23 +5,24 @@ It's recommended that you use Docker for development.
 ### Requirements
 
 -   Docker 27
--   Composer 2.8 (for intellisense)
 
 ### Step by step
 
-For getting intellisense on vscode (you can ignore this step if you dont need intellisense ) you need to install composer dependencies on app directory, so run this on /app:
+Installing dependencies using docker:
+
+1. Run the following command to install dependencies:
 
 ```shell
-composer install
+docker run --rm -v $(pwd)/app:/app composer install
 ```
 
-You need to have a .env file so compose run flawless, you can copy .env.example to .env in /:
+1. Copy the example environment file:
 
 ```shell
 cp .env.example .env
 ```
 
-You can start developing running this command on /:
+1. Run the following command to start the application:
 
 ```shell
 docker compose up --watch

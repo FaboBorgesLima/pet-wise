@@ -4,7 +4,7 @@ namespace App\Views\Components;
 
 class Header
 {
-    static function render()
+    public static function render()
     {
 ?>
         <nav>

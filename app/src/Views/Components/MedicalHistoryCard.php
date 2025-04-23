@@ -6,7 +6,7 @@ use App\Models\MedicalHistory;
 
 class MedicalHistoryCard
 {
-    static function render(MedicalHistory $medical_history)
+    public static function render(MedicalHistory $medical_history)
     {
 ?>
 

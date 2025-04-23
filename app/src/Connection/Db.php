@@ -1,14 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Connection;
 
-ini_set('mysql.connect_timeout', 300);
-
-class Connection
+class Db
 {
 
-    static function get(): \mysqli
+    public static function get(): \mysqli
     {
+        ini_set('mysql.connect_timeout', 300);
         return  new \mysqli($_ENV['DB_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
     }
 }

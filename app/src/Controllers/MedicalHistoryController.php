@@ -10,12 +10,12 @@ use App\Views\ShowAll;
 
 class MedicalHistoryController
 {
-    static function showAll(Request $req)
+    public static function showAll(Request $req)
     {
         $all = MedicalHistory::all();
         ShowAll::render($all);
     }
-    static function show(Request $req)
+    public static function show(Request $req)
     {
         if (array_key_exists("id", $req->get)) {
             $medical_history = MedicalHistory::byId((int)$req->get["id"]);
@@ -25,7 +25,7 @@ class MedicalHistoryController
 
         Show::render();
     }
-    static function delete(Request $req)
+    public static function delete(Request $req)
     {
         if (array_key_exists("id", $req->post)) {
             $medical_history = MedicalHistory::byId((int)$req->post["id"]);
@@ -38,7 +38,7 @@ class MedicalHistoryController
         header("Location: /");
     }
 
-    static function update(Request $req)
+    public static function update(Request $req)
     {
 
         if (
@@ -65,7 +65,7 @@ class MedicalHistoryController
         header("Location: /");
     }
 
-    static function create(Request $req)
+    public static function create(Request $req)
     {
         if (
             !(

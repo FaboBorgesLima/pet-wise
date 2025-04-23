@@ -4,7 +4,7 @@ namespace App\Views\Components;
 
 class Head
 {
-    static function render(string $title)
+    public static function render(string $title)
     {
 ?>
 

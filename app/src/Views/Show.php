@@ -8,7 +8,7 @@ use App\Views\Components\Header;
 
 class Show
 {
-    static function render(?MedicalHistory $item = null)
+    public static function render(?MedicalHistory $item = null)
     {
 ?>
         <!DOCTYPE html>

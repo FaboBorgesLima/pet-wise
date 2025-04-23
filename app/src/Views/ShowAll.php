@@ -6,11 +6,9 @@ use App\Views\Components\Head;
 use App\Views\Components\Header;
 use App\Views\Components\MedicalHistoryCard;
 
-use function App\Views\Components\medical_history_card;
-
 class ShowAll
 {
-    static function render(array $list)
+    public static function render(array $list)
     {
 ?>
         <!DOCTYPE html>
